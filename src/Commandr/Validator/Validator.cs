@@ -2,7 +2,7 @@
 
 namespace Commandr.Validator
 {
-	public static class Validators
+	public class Validator
 	{
 		public static IValidator Integer { get; set; }
 		public static IValidator Array { get; set; }

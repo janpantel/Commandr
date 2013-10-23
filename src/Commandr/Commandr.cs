@@ -9,39 +9,31 @@ namespace Commandr
 {
     public class Commandr
     {
-        protected IEnumerable<_Type> commands;
+        protected ICollection<ICommand> commands;
 
         /// <summary>
-        /// Creates a new instance of <see cref="Commandr.Commandr"/> with the commands from the calling assembly.
+        /// Creates a new instance of <see cref="Commandr.Commandr"/>.
         /// </summary>
-        public Commandr() : this(new List<_Assembly>() { Assembly.GetCallingAssembly() })
+        public Commandr()
         {
-            
+        	if (this.commands == null)
+        	{
+        		commands = new List<ICommand>();
+        	}
         }
-
+        
         /// <summary>
-        /// Creates a new instance of <see cref="Commandr.Commandr"/> with the commands from the given
-        /// assemblies.
-        /// If
+        /// Creates a new instance of <see cref="Commandr.Commandr"/>.
         /// </summary>
-        /// <param name="assemblies">A collection of assemblies from where Commandr should load the command classes.</param>
-        public Commandr(IEnumerable<_Assembly> assemblies)
+        /// <param name="commands">The commands to register</param>
+        public Commandr(ICollection<ICommand> commands) : this()
         {
-            this.commands = 
-                //Select every type from the assemblies...
-                assemblies.SelectMany(a => a.GetTypes()
-                    //..that implements ICommand.
-                    .Where(t => t.GetInterfaces()
-                        .Any(i => i.Equals(typeof(ICommand)))));
+        	this.commands = commands;
         }
-
-        /// <summary>
-        /// Creates a new instance of <see cref="Commandr.Commandr"/> with the given commands.
-        /// </summary>
-        /// <param name="commands">A collection of the types of the command classes that should be registered.</param>
-        public Commandr(IEnumerable<_Type> commands)
+        
+        public void RegisterCommand(ICommand cmd)
         {
-            this.commands = commands;
+        	this.commands.Add(cmd);
         }
         
         public void ResolveCommand(string cmd)

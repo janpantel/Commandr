@@ -44,21 +44,30 @@ namespace Commandr
         {
         	var splitted = this.splitter.SplitCommand(cmd);
         	
-        	var command = 
-        		(from item in this.commands
-        		let type = item.GetType()
-        		let commandAttribute = 
-        			type.GetCustomAttributes(typeof(CommandAttribute), true).FirstOrDefault()
-        		where commandAttribute != null
-        		&& (commandAttribute as CommandAttribute).Command == splitted.Command
-        		select item).FirstOrDefault();
+        	ICommand command = null;
+
+        	if (this.cache.ContainsKey(splitted.Command))
+        	{
+        		command = this.cache[splitted.Command];
+        	}
+        	else
+        	{
+        		command = 
+	        		(from item in this.commands
+	        		let type = item.GetType()
+	        		let commandAttribute = 
+	        			type.GetCustomAttributes(typeof(CommandAttribute), true).FirstOrDefault()
+	        		where commandAttribute != null
+	        		&& (commandAttribute as CommandAttribute).Command == splitted.Command
+	        		select item).FirstOrDefault();
+        		
+        		this.cache.Add(splitted.Command, command);
+        	}
         	
         	if (command == null)
         	{
         		throw new ArgumentException("The command " + splitted.Command + " does not exist");
         	}
-        	
-        	this.cache.Add(splitted.Command, command);
         	
         	var message = command.Run(splitted.Arguments);
         	

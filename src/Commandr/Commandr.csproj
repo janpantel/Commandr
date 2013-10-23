@@ -46,9 +46,16 @@
     <Compile Include="Commandr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\ICommand.cs" />
+    <Compile Include="Utils\CommandSplitter\DefaultCommandSplitter.cs" />
+    <Compile Include="Utils\CommandSplitter\ICommandSplitter.cs" />
+    <Compile Include="Utils\CommandSplitter\SplittedCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils" />
+    <Folder Include="Utils\CommandSplitter" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

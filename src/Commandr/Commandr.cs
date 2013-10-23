@@ -43,5 +43,10 @@ namespace Commandr
         {
             this.commands = commands;
         }
+        
+        public void ResolveCommand(string cmd)
+        {
+			        
+        }
     }
 }

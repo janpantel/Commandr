@@ -54,7 +54,7 @@
     <Compile Include="Validator\ArrayValidator.cs" />
     <Compile Include="Validator\IntegerValidator.cs" />
     <Compile Include="Validator\IValidator.cs" />
-    <Compile Include="Validator\Validators.cs" />
+    <Compile Include="Validator\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes" />

@@ -54,7 +54,8 @@ namespace Commandr.Utils.CommandSplitter
 				let others = indexes.SkipWhile(a => a.Key != arg).Skip(1)
 				let next = others.Any() ? others.First().Index : args.Count
 				let val = string.Join(FRAGMENT_DELIMITER, args.Skip(index + 1).Take(next - index - 1).ToArray())
-				select new KeyValuePair<string, string>(arg, val)).ToDictionary(x => x.Key, x => x.Value);
+				let cleanedArg = arg.Replace(ARGUMENT_PREFIX, string.Empty)
+				select new KeyValuePair<string, string>(cleanedArg, val)).ToDictionary(x => x.Key, x => x.Value);
 		}
 	}
 }

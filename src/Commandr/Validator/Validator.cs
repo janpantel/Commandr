@@ -7,10 +7,10 @@ namespace Commandr.Validator
 		public static IValidator Integer { get; set; }
 		public static IValidator Array { get; set; }
 		
-		static Validators()
+		static Validator()
 		{
-			Validators.Integer = new IntegerValidator();
-			Validators.Array = new ArrayValidator();
+			Validator.Integer = new IntegerValidator();
+			Validator.Array = new ArrayValidator();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Commandr.Attributes
 {
-	public class ArgumentAttribute
+	public class ArgumentAttribute : Attribute
 	{
 		public string Name { get; set; }
 		

@@ -1,11 +1,12 @@
 ﻿using System;
+using Commandr.Configuration;
 
 namespace Commandr.Validator
 {
 	public class ArrayValidator : IValidator
 	{
-		public const char ARRAY_PREFIX = '[';
-		public const char ARRAY_SUFFIX = ']';
+		public static string ARRAY_PREFIX = CommandrConfiguration.ARRAY_PREFIX;
+		public static string ARRAY_SUFFIX = CommandrConfiguration.ARRAY_SUFFIX;
 		
 		public bool Validate(string value)
 		{

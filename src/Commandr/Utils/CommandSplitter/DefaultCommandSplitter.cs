@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Commandr.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,9 +7,9 @@ namespace Commandr.Utils.CommandSplitter
 {
 	public class DefaultCommandSplitter : ICommandSplitter
 	{
-		public const char FRAGMENT_DELIMITER = ' ';
-		public const string ARGUMENT_PREFIX = "-";
-		public const string ARGUMENT_VALUE_PREFIX = "\"";
+		protected static string FRAGMENT_DELIMITER = CommandrConfiguration.COMMAND_FRAGMENT_DELIMITER;
+		protected static string ARGUMENT_PREFIX = CommandrConfiguration.ARGUMENT_PREFIX;
+		protected static string ARGUMENT_VALUE_PREFIX = CommandrConfiguration.ARGUMENT_VALUE_PREFIX;
 		
 		public SplittedCommand SplitCommand(string command)
 		{
@@ -18,7 +19,7 @@ namespace Commandr.Utils.CommandSplitter
 			}
 			
 			var splittedCommand = new SplittedCommand();
-			var splittedString = command.Split(FRAGMENT_DELIMITER);
+			var splittedString = command.Split(FRAGMENT_DELIMITER.ToCharArray());
 			
 			var cmd = splittedString.FirstOrDefault();
 			
@@ -52,7 +53,7 @@ namespace Commandr.Utils.CommandSplitter
 				let index = args.IndexOf(arg)
 				let others = indexes.SkipWhile(a => a.Key != arg).Skip(1)
 				let next = others.Any() ? others.First().Index : args.Count
-				let val = string.Join(FRAGMENT_DELIMITER.ToString(), args.Skip(index + 1).Take(next - index - 1).ToArray())
+				let val = string.Join(FRAGMENT_DELIMITER, args.Skip(index + 1).Take(next - index - 1).ToArray())
 				select new KeyValuePair<string, string>(arg, val)).ToDictionary(x => x.Key, x => x.Value);
 		}
 	}

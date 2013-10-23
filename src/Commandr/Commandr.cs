@@ -1,34 +1,34 @@
-﻿using Commandr.Shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
+using Commandr.Shared;
+using Commandr.Utils.CommandSplitter;
+using Commandr.Utils.Output;
 
 namespace Commandr
 {
     public class Commandr
     {
         protected ICollection<ICommand> commands;
-
-        /// <summary>
-        /// Creates a new instance of <see cref="Commandr.Commandr"/>.
-        /// </summary>
-        public Commandr()
-        {
-        	if (this.commands == null)
-        	{
-        		commands = new List<ICommand>();
-        	}
-        }
+        protected ICommandSplitter splitter;
+        protected IOutput output;
         
         /// <summary>
         /// Creates a new instance of <see cref="Commandr.Commandr"/>.
         /// </summary>
         /// <param name="commands">The commands to register</param>
-        public Commandr(ICollection<ICommand> commands) : this()
+        public Commandr(
+        	ICollection<ICommand> commands = null, 
+        	ICommandSplitter splitter = null,
+        	IOutput output = null
+        )
         {
-        	this.commands = commands;
+        	this.commands = commands ?? new List<ICommand>();
+        	this.splitter = splitter ?? new DefaultCommandSplitter();
+        	this.output = output ?? new ConsoleOutput();
         }
         
         public void RegisterCommand(ICommand cmd)
@@ -38,7 +38,7 @@ namespace Commandr
         
         public void ResolveCommand(string cmd)
         {
-			        
+        	        	
         }
     }
 }

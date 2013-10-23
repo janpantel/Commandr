@@ -7,5 +7,6 @@ namespace Commandr.Shared
 {
     public interface ICommand
     {
+    	IEnumerable<string> Run(IDictionary<string, string> attributes);
     }
 }

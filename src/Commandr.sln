@@ -1,6 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.3
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commandr", "Commandr\Commandr.csproj", "{71527729-33EA-4550-BA75-71D25BB44326}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commandr.Test", "Commandr.Test\Commandr.Test.csproj", "{79D79854-4F04-45A2-8D55-489A31B5E1D2}"

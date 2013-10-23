@@ -49,6 +49,8 @@
     <Compile Include="Utils\CommandSplitter\DefaultCommandSplitter.cs" />
     <Compile Include="Utils\CommandSplitter\ICommandSplitter.cs" />
     <Compile Include="Utils\CommandSplitter\SplittedCommand.cs" />
+    <Compile Include="Utils\Listener\ConsoleListener.cs" />
+    <Compile Include="Utils\Listener\IListener.cs" />
     <Compile Include="Utils\Output\ConsoleOutput.cs" />
     <Compile Include="Utils\Output\IOutput.cs" />
     <Compile Include="Validator\ArrayValidator.cs" />
@@ -59,6 +61,7 @@
   <ItemGroup>
     <Folder Include="Attributes" />
     <Folder Include="Configuration" />
+    <Folder Include="Utils\Listener" />
     <Folder Include="Utils\Output" />
     <Folder Include="Validator" />
     <Folder Include="Utils" />

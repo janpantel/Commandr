@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using Commandr.Attributes;
 using Commandr.Shared;
 using Commandr.Utils.CommandSplitter;
+using Commandr.Utils.Listener;
 using Commandr.Utils.Output;
 
 namespace Commandr
@@ -17,6 +18,9 @@ namespace Commandr
         protected ICommandSplitter splitter;
         protected IOutput output;
         protected IDictionary<string, ICommand> cache;
+        protected IListener listener;
+        
+        protected bool shouldExit;
         
         /// <summary>
         /// Creates a new instance of <see cref="Commandr.Commandr"/>.
@@ -26,13 +30,17 @@ namespace Commandr
         	ICollection<ICommand> commands = null, 
         	ICommandSplitter splitter = null,
         	IOutput output = null,
-        	IDictionary<string, ICommand> cache = null
+        	IDictionary<string, ICommand> cache = null,
+        	IListener listener = null
         )
         {
         	this.commands = commands ?? new List<ICommand>();
         	this.splitter = splitter ?? new DefaultCommandSplitter();
         	this.output = output ?? new ConsoleOutput();
         	this.cache = cache ?? new Dictionary<string, ICommand>();
+        	this.listener = listener ?? new ConsoleListener();
+        	
+        	this.shouldExit = false;
         }
         
         public void RegisterCommand(ICommand cmd)
@@ -72,6 +80,19 @@ namespace Commandr
         	var message = command.Run(splitted.Arguments);
         	
         	message.ToList().ForEach(x => this.output.Write(x));
+        }
+        
+        public void StartListener()
+        {
+        	while (!this.shouldExit)
+        	{
+        		this.ResolveCommand(this.listener.Listen());
+        	}
+        }
+        
+        public void StopListener()
+        {
+        	this.shouldExit = true;
         }
     }
 }

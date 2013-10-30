@@ -1,6 +1,7 @@
 ﻿using Commandr.Attributes;
 using Commandr.Configuration;
 using Commandr.Shared;
+using Commandr.Utils.Output;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +13,20 @@ namespace Commandr.Utils.CommandResolver
     {
         protected IDictionary<string, ICommand> cache;
         protected ICollection<ICommand> commands;
+        protected IOutput output;
 
         public DefaultCommandResolver(
+            IOutput output,
             ICollection<ICommand> commands = null,
             IDictionary<string, ICommand> cache = null
             )
         {
             this.commands = commands ?? new List<ICommand>();
             this.cache = cache ?? new Dictionary<string, ICommand>();
+            this.output = output;
         }
 
-        public IEnumerable<string> Resolve(CommandSplitter.SplittedCommand cmd)
+        public void Resolve(CommandSplitter.SplittedCommand cmd)
         {
             ICommand command = null;
 
@@ -47,10 +51,25 @@ namespace Commandr.Utils.CommandResolver
             if (command == null)
             {
                 var failMessage = CommandrConfiguration.COMMAND_NOT_FOUND_MESSAGE.Replace("%cmd%", "\"" + cmd.Command + "\"");
-                return new List<string> { failMessage };
+                output.Write(failMessage);
+                return;
             }
 
-            return command.Run(cmd.Arguments);
+            var arguments =
+                from item in command.GetType().GetCustomAttributes(typeof(ArgumentAttribute), true)
+                select item as ArgumentAttribute;
+
+            foreach (var argument in arguments.Where(arg => arg.IsRequired))
+            {
+                if (!cmd.Arguments.ContainsKey(argument.Name))
+                {
+                    output.Write("The argument " + argument.Name + " is missing!");
+                    return;
+                }
+            }
+
+            command.Output = this.output;
+            command.Run(cmd.Arguments);
         }
 
         public void RegisterCommand(ICommand cmd)

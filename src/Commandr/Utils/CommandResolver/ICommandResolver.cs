@@ -9,7 +9,7 @@ namespace Commandr.Utils.CommandResolver
 {
     public interface ICommandResolver
     {
-        IEnumerable<string> Resolve(SplittedCommand cmd);
+        void Resolve(SplittedCommand cmd);
         void RegisterCommand(ICommand cmd);
     }
 }

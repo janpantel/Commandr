@@ -42,7 +42,7 @@ namespace Commandr
         	this.output = output ?? new ConsoleOutput();
         	this.listener = listener ?? new ConsoleListener();
             this.shutdownBroker = shutdownBroker ?? new DefaultShutdownBroker();
-            this.resolver = new DefaultCommandResolver();
+            this.resolver = new DefaultCommandResolver(this.output);
 
         	this.shouldExit = false;
 
@@ -63,12 +63,7 @@ namespace Commandr
         {
         	var splitted = this.splitter.SplitCommand(cmd);
 
-            var message = this.resolver.Resolve(splitted);
-
-            if (message != null)
-            {
-                message.ToList().ForEach(x => this.output.Write(x));
-            }
+            this.resolver.Resolve(splitted);
         }
 
         public void StartListener(string prefix)

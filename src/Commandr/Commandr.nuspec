@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Commandr</id>
+    <version>0.0.1</version>
+    <authors>Jan-Oliver Pantel</authors>
+    <owners>Jan-Oliver Pantel</owners>
+    <licenseUrl>https://github.com/kyjan/Commandr/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/kyjan/Commandr</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library for building modular command line applications.</description>
+    <tags>Commandr console</tags>
+  </metadata>
+</package>

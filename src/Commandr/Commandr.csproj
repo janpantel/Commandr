@@ -44,29 +44,29 @@
     <Compile Include="Attributes\CommandAttribute.cs" />
     <Compile Include="Commandr.cs" />
     <Compile Include="Configuration\CommandrConfiguration.cs" />
+    <Compile Include="ICommandr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\ICommand.cs" />
+    <Compile Include="Utils\CommandResolver\DefaultCommandResolver.cs" />
+    <Compile Include="Utils\CommandResolver\ICommandResolver.cs" />
+    <Compile Include="Utils\DefaultCommands\ClearCommand.cs" />
     <Compile Include="Utils\CommandSplitter\DefaultCommandSplitter.cs" />
     <Compile Include="Utils\CommandSplitter\ICommandSplitter.cs" />
     <Compile Include="Utils\CommandSplitter\SplittedCommand.cs" />
+    <Compile Include="Utils\DefaultCommands\ExitCommand.cs" />
     <Compile Include="Utils\Listener\ConsoleListener.cs" />
     <Compile Include="Utils\Listener\IListener.cs" />
     <Compile Include="Utils\Output\ConsoleOutput.cs" />
     <Compile Include="Utils\Output\IOutput.cs" />
+    <Compile Include="Utils\Shutdown\DefaultShutdownBroker.cs" />
+    <Compile Include="Utils\Shutdown\IShutdownBroker.cs" />
+    <Compile Include="Utils\Shutdown\IShutdownHandler.cs" />
     <Compile Include="Validator\ArrayValidator.cs" />
     <Compile Include="Validator\IntegerValidator.cs" />
     <Compile Include="Validator\IValidator.cs" />
     <Compile Include="Validator\Validator.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes" />
-    <Folder Include="Configuration" />
-    <Folder Include="Utils\Listener" />
-    <Folder Include="Utils\Output" />
-    <Folder Include="Validator" />
-    <Folder Include="Utils" />
-    <Folder Include="Utils\CommandSplitter" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

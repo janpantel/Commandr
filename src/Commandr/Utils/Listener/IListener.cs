@@ -4,6 +4,6 @@ namespace Commandr.Utils.Listener
 {
 	public interface IListener
 	{
-		string Listen();
+		string Listen(string prefix);
 	}
 }

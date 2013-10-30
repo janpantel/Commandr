@@ -46,7 +46,7 @@ namespace Commandr.Utils.CommandResolver
 
             if (command == null)
             {
-                var failMessage = CommandrConfiguration.COMMAND_NOT_FOUND_MESSAGE.Replace("%cmd%", "\"" + cmd + "\"");
+                var failMessage = CommandrConfiguration.COMMAND_NOT_FOUND_MESSAGE.Replace("%cmd%", "\"" + cmd.Command + "\"");
                 return new List<string> { failMessage };
             }
 
